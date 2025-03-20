@@ -1,8 +1,13 @@
 ---
+import { firebase } from "@/firebase/config";
 import MainLayout from "@/layouts/MainLayout.astro";
+import { reload } from "firebase/auth";
 
 const { user } = Astro.locals;
-const { avatar, email, emailVerified, name } = user!
+const { avatar, email, name } = user!
+const firebaseUser = firebase.auth.currentUser;
+await firebaseUser?.reload();
+const { emailVerified  } = firebaseUser!;
 ---
 
 <MainLayout>
